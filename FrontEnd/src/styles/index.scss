@@ -1,0 +1,152 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Roboto Mono";
+  font-size: 15px;
+}
+main{
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+.mainContainer{
+  display: flex;
+  height: 450px;
+  justify-content: center;
+  width: 50%;
+}
+.dataDisplay{
+  width: 350px;
+}
+.inputContainer{
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 50%;
+}
+.inputs{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.dataInput{
+  margin-bottom: 40px;
+  height: 25px;
+  width: 350px;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid black;
+}
+
+.submitButton{
+  border: none;
+  width: 150px;
+  height: 25px;
+  cursor: pointer;
+  margin: auto;
+  margin-top: 100px;
+}
+.inputLabel{
+  margin-bottom: 15px;
+  font-size: 17px;
+}
+.dataInputError{
+  margin-bottom: 40px;
+  height: 25px;
+  width: 350px;
+  border: none;
+  outline: none;
+  
+}
+.HomePage{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: flex-end;
+}
+.HomePageContent{
+  width: 100%;
+  height: 100%;
+}
+.FinanceNewsBG{
+  width: 100%;
+  height: 100%;
+  background-image: url('../../public/BackgroundImages/NewsPage.jpg');
+  background-size: contain;
+}
+.WorldNewsBG{
+  width: 100%;
+  height: 100%;
+  background-image: url('../../public/BackgroundImages/WorldNewsBG.jpg');
+  background-size: contain;
+}
+.BudgedPageImage {
+  width: 100%;
+  height: 100%;
+  background-image: url('../../public/BackgroundImages/HomePageBG.jpg');
+  background-size: contain;
+}
+.IncomeCalculatorImage {
+  width: 100%;
+  background-image: url('../../public/BackgroundImages/Income CalculatorBG.jpg');
+  background-size: contain;
+}
+.UnsubmitedForm{
+  display: flex;
+  flex-direction: column;
+  gap: 4;
+  padding: 4;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  height: 70%;
+}
+.SubmitedForm{
+  display: flex;
+  flex-direction: column;
+
+}
+
+.bothParts{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  height: 450px;
+  justify-content: center;
+  padding-right: 70px;
+}
+.RegisterPageBG {
+  width: 100%;
+  height: 100%;
+  background-image: url('../../public/BackgroundImages/RegisterBG.jpg');
+  background-size: contain;
+  margin-top: 50px
+}
+.LoginPageBG {
+  width: 100%;
+  height: 100%;
+  background-image: url('../../public/BackgroundImages/LoginBG.jpg');
+  background-size: contain;
+}
+.HomePageBG{
+  width: 100%;
+  height: 100%;
+  background-image: url('../../public/BackgroundImages/HomePage.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.StocksBG{
+  
+  width: 100%;
+  height: 100%;
+  background-image: url('../../public/BackgroundImages/StocksBG.jpg');
+  background-size: contain;
+}

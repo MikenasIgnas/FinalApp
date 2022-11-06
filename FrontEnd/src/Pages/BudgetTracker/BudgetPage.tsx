@@ -27,7 +27,7 @@ const BudgetPage = () => {
   const [priceValues, setPriceValue] = React.useState<number>(0);
   const [expenses, setExpenses] = React.useState<number>(0);
   const [expenseName, setExpenseName] = React.useState('');
-  const [list, setList] = React.useState<List[] >([]);
+  const [list, setList] = React.useState<List[] >();
   const [errorMsg, setErrorMsg] = React.useState('');
   const id = useAppSelector((state) => state.id);
   const secret = useAppSelector((state) => state.secret);
@@ -48,7 +48,7 @@ const BudgetPage = () => {
     };
 
     if (price !== 0 && name !== '' && income !== 0) {
-      setList([...list, newExpense]);
+      setList(list && [...list, newExpense]);
       const TotalExpenses = [newExpense]?.reduce(
         (previousValue, currentValue) => previousValue + currentValue.price,
         expenses,
@@ -57,6 +57,7 @@ const BudgetPage = () => {
         setExpenseName('');
         setPriceValue(0);
         setBalance(balance - price);
+
         await post('budgetData', newExpense);
       }
       if (income === 0) {

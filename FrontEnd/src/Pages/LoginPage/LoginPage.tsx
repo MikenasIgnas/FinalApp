@@ -38,11 +38,9 @@ const LoginPage = () => {
                   email: '',
                     password: '',
                   },
-
                   onSubmit(formikValues) {
                     const postData = async () => {
                         const res = await post('login', formikValues);
-                        console.log(res);
                         if (!res.error) {
                           if (formikValues.email) {
                             localStorage.setItem('username', res.data.username);

@@ -39,7 +39,7 @@ const HomePage = () => {
         paddingLeft: '20px',
   }}
           >
-            <Typography variant="h3">Welcome to Fintrack</Typography>
+            <Typography variant="h3">Welcome to FinTrack</Typography>
             <Typography variant="h5">Read news, track your finances, and budged your spending!</Typography>
             <Button onClick={getStarted} variant="contained">Get Started</Button>
           </Box>

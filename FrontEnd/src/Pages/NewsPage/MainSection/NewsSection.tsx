@@ -17,13 +17,19 @@ const MainSection = () => {
   const [financialNews, setFinancialNews] = React.useState<NewsType>();
   const [worldNews, setWorldNews] = React.useState<WorldNewsType>();
   const [clicked, setClicked] = React.useState(false);
+
   React.useEffect(() => {
     (async () => {
-      const fetchedNews = await NewsService.fetchNews();
-      setFinancialNews(fetchedNews);
-      setClicked(false);
-    })();
+      if (!financialNews) {
+        const fetchedNews = await NewsService.fetchNews();
+        if (fetchedNews) {
+          setFinancialNews(fetchedNews);
+          setClicked(false);
+        }
+      }
+      })();
   }, []);
+
   const navigate = useNavigate();
   const getWorldNews = async () => {
     const data = await fetch(newsApi);
@@ -33,10 +39,12 @@ const MainSection = () => {
 
     setClicked(true);
   };
+
   const getFinanceNews = async () => {
     navigate('/news');
     setClicked(false);
   };
+
   return (
     <Box
       sx={{

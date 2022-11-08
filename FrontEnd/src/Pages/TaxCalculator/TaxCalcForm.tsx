@@ -49,6 +49,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
       >
         {submitText}
       </Button>
+      <Typography>*Based on Lithuanian tax code</Typography>
     </Paper>
   );
 };

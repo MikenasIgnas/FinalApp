@@ -41,6 +41,7 @@ const StocksPage = () => {
     const [changeValue, setChangeValue] = React.useState(false);
     const [priceTime, setPriceTime] = React.useState(new Date());
     const [category, setCategory] = React.useState('Index');
+    const [etfName, setEtfName] = React.useState('SPY');
     const indeciesURL = `https://yahoo-finance-api.vercel.app/${indexName}`;
     const stonksUrl = `https://yahoo-finance-api.vercel.app/${ticker}`;
     const round = (number:number) => (number ? +(number.toFixed(2)) : null);
@@ -185,6 +186,7 @@ const StocksPage = () => {
                  setIndexName={setIndexName}
                  indexName={el?.index_name}
                  setChangeValue={setChangeValue}
+                 setEtfName={setEtfName}
                />
            ))}
            </Box>
@@ -202,7 +204,7 @@ const StocksPage = () => {
                <Typography variant="h6">
                  Ticker:
                  {' '}
-                 {!changeValue ? '' : selectedStock?.[0]?.ticker}
+                 {!changeValue ? etfName : selectedStock?.[0]?.ticker}
                </Typography>
                <Typography variant="h6">
                  Exange:

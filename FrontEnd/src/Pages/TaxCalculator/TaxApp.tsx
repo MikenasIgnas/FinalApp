@@ -70,7 +70,7 @@ const TaxApp = () => {
         <AuthForm
           setClicked={setClicked}
           clicked={clicked}
-          title="Income Calculator"
+          title="Tax Calculator"
           submitText={!valid ? 'Calculate' : 'Clear'}
           onSubmit={handleSubmit}
           className={!valid ? 'UnsubmitedForm' : 'SubmitedForm'}
@@ -80,9 +80,9 @@ const TaxApp = () => {
             className={!valid ? 'mainContainer' : 'bothParts'}
           >
             <Box sx={{
-        display: !clicked ? 'none' : 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
+            display: !clicked ? 'none' : 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
         }}
             >
               {valid && pieChart

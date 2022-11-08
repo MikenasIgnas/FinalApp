@@ -38,7 +38,7 @@ const InputContainer:React.FC<InputContainerProps> = ({
         name="incomeValue"
         placeholder="Enter your Income ammount"
         id="incomeInput"
-        label="Income"
+        label="Income (Bruto)"
         type="number"
       >
         Income

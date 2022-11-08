@@ -1,5 +1,6 @@
 const UserRegisterSchema = require("../../shemas/UserRegisterSchema");
 const BudgetSchema = require("../../shemas/UserBudgetSchema")
+const MoneyValueSchema = require("../../shemas/MoneyValuesSchema")
 const {uid} = require("uid");
 const bcrypt = require("bcrypt");
 const sendRes = require("../modules/universalRes");
@@ -57,4 +58,30 @@ module.exports = {
 
         res.send({success: true})
     },
+    postMoneyValues: async (req, res) => {
+        const budget = await MoneyValueSchema(req.body)
+        await budget.save()
+        return sendRes(res, false, 'all good', budget)
+    },
+    updateMoneyValues: async (req, res) => {
+        const {_id, income, expenses, balance, secret} = req.body
+        console.log(_id, income, expenses, balance)
+
+        const post = await MoneyValueSchema.findOneAndUpdate(
+            {secret: secret},
+            {$set: {income: income, expenses:expenses, balance:balance}},
+            {new : true}
+        )
+
+        console.log(post)
+
+        return sendRes(res, false, 'all good', post)
+    },
+    latestMoneyValues: async (req, res) => {
+        const {secret} = req.params
+        const lastestValues = await MoneyValueSchema.findOne({secret})
+        return sendRes(res, false, 'all Good',lastestValues)
+    }
+  
+
 }

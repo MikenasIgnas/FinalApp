@@ -28,42 +28,85 @@ const BudgetPage = () => {
   const [expenses, setExpenses] = React.useState<number>(0);
   const [expenseName, setExpenseName] = React.useState('');
   const [list, setList] = React.useState<List[] >();
+  const [added, setAdded] = React.useState(false);
   const [errorMsg, setErrorMsg] = React.useState('');
   const id = useAppSelector((state) => state.id);
   const secret = useAppSelector((state) => state.secret);
+
   React.useEffect(() => {
+    // get
     (async () => {
       if (!list && id && secret) {
         const response = await get(`savedBudgetData/${id}/${secret}`);
+        const res = await get(`latestMoneyValues/${id}/${secret}`);
+        if (res.data) {
+          setIncome(res.data.income);
+          setExpenses(res.data.expenses);
+          setBalance(res.data.balance);
+        } else {
+          setIncome(0);
+          setExpenses(0);
+          setBalance(0);
+        }
         setList(response.data);
       }
     })();
   }, [list, id]);
-  const AddListItem = async (price:number, name:string) => {
-    const newExpense = {
-      _id: String(Math.random()),
-      price: priceValues,
-      expense: expenseName,
-      secret,
-    };
 
+  const AddListItem = async (price:number, name:string) => {
+    // post
     if (price !== 0 && name !== '' && income !== 0) {
-      setList(list && [...list, newExpense]);
-      const TotalExpenses = [newExpense]?.reduce(
-        (previousValue, currentValue) => previousValue + currentValue.price,
+      try {
+        const newExpense = {
+          _id: String(Math.random()),
+          price: priceValues,
+          expense: expenseName,
+          secret,
+        };
+        const moneyValues = {
+          _id: String(Math.random()),
+          income,
+          expenses,
+          balance,
+          secret,
+        };
+        await post('budgetData', newExpense);
+        await post('postMoneyValues', moneyValues);
+
+        setList((prev) => (prev ? [...prev, newExpense] : [newExpense]));
+        const TotalExpenses = [newExpense]?.reduce(
+          (previousValue, currentValue) => previousValue + currentValue.price,
         expenses,
         );
         setExpenses(TotalExpenses);
         setExpenseName('');
         setPriceValue(0);
         setBalance(balance - price);
-
-        await post('budgetData', newExpense);
+        setAdded(!added);
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.log(error);
       }
-      if (income === 0) {
-        setErrorMsg('Add Income First');
-      }
+    }
+    if (income === 0) {
+      setErrorMsg('Add Income First');
+    }
   };
+
+  if (added) {
+    const updatedValues = {
+      _id: String(Math.random()),
+      income,
+      balance,
+      expenses,
+      secret,
+    };
+    const update = async () => {
+       await post('updateMoneyValues', updatedValues);
+    };
+    update();
+    setAdded(!added);
+  }
 
   const deleteItem = (_id:string) => {
     const newList = list?.filter((item) => item._id !== String(_id));
@@ -73,12 +116,24 @@ const BudgetPage = () => {
         const removeBalance = balance + price;
         setExpenses(removeExpense);
         setBalance(removeBalance);
+        const updatedValues = {
+          _id: String(Math.random()),
+          income,
+          balance: removeBalance,
+          expenses: removeExpense,
+          secret,
+        };
+        const update = async () => {
+           await post('updateMoneyValues', updatedValues);
+        };
+        update();
         await get(`deletePost/${id}/${secret}`);
       }
     };
     list?.filter((item) => filterItem(item._id, item.price));
     setList(newList);
   };
+
   return (
     <Box
       sx={{

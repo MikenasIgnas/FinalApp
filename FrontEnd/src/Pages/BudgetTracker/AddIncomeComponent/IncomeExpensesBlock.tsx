@@ -15,9 +15,17 @@ type IncomeExpensesBlockProps = {
   balance:number
   errorMsg:string
   setErrorMsg: React.Dispatch<React.SetStateAction<string>>,
+
 };
 const IncomeExpensesBlock = ({
- expenses, setIncome, income, balance, setBalance, errorMsg, setErrorMsg, setExpenses,
+ expenses,
+ setIncome,
+ income,
+ balance,
+ setBalance,
+ errorMsg,
+ setErrorMsg,
+ setExpenses,
 }:IncomeExpensesBlockProps) =>
    (
      <Box sx={{ display: 'flex', justifyContent: 'center', padding: '30px' }}>
@@ -29,6 +37,7 @@ const IncomeExpensesBlock = ({
            <Typography sx={{ color: 'red' }}>{errorMsg }</Typography>
          </Typography>
          <IncomeInput
+           balance={balance}
            setExpenses={setExpenses}
            setIncome={setIncome}
            setBalance={setBalance}

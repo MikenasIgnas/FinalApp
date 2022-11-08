@@ -7,10 +7,11 @@ type ButtonProps = {
     setStockName: React.Dispatch<React.SetStateAction<string | null | undefined>>
     setCategory: React.Dispatch<React.SetStateAction<string>>
     setChangeValue: React.Dispatch<React.SetStateAction<boolean>>
+    setEtfName: React.Dispatch<React.SetStateAction<string>>
 
 };
 const IndexButtons = ({
- indexName, setIndexName, setStockName, setCategory, setChangeValue,
+ indexName, setIndexName, setStockName, setCategory, setChangeValue, setEtfName,
 }:ButtonProps) => {
     const handleIndexChange = () => {
         if (indexName === 'S&P 500') {
@@ -18,6 +19,7 @@ const IndexButtons = ({
                 setIndexName('SPY');
                 setStockName(indexName);
                 setCategory('Index');
+                setEtfName('SPY');
             }
 
         if (indexName === 'Nasdaq 100') {
@@ -25,6 +27,7 @@ const IndexButtons = ({
                 setIndexName('QQQ');
                 setStockName(indexName);
                 setCategory('Index');
+                setEtfName('QQQ');
             }
     };
 

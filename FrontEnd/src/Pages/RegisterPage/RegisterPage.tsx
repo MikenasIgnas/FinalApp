@@ -29,6 +29,7 @@ const validationSchema = yup.object({
 const RegisterPage = () => {
   const navigate = useNavigate();
   const [errorMsg, setErrorMsg] = React.useState(true);
+  const [errorText, setErrorText] = React.useState('');
   const {
     values, touched, errors, isValid, dirty,
     handleChange, handleBlur, handleSubmit, resetForm,
@@ -44,8 +45,8 @@ const RegisterPage = () => {
                      const sendRegisterData = async () => {
                         try {
                           const res = await post('registerUser', formData);
-                        console.log(res);
-                        resetForm();
+                          setErrorText(res.message);
+                          resetForm();
                         if (!res.error) {
                           setErrorMsg(!errorMsg);
                           setTimeout(() => {
@@ -95,6 +96,7 @@ const RegisterPage = () => {
         repeatPasswordHelperText={touched.repeatPassword && errors.repeatPassword}
         onBlur={handleBlur}
       />
+      {dirty ? '' : <Typography sx={{ color: 'red' }} variant="h6">{errorText}</Typography>}
       <Box sx={{ display: 'flex', alignItems: 'center' }}>
         <Typography>Already have an account?</Typography>
         <Button onClick={getToLoginPage}>Log In</Button>

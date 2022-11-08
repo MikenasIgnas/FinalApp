@@ -53,9 +53,7 @@ module.exports = {
     },
     deletePost: async (req, res) => {
         const {id} = req.params
-
         await BudgetSchema.findOneAndDelete({_id: id})
-
         res.send({success: true})
     },
     postMoneyValues: async (req, res) => {
@@ -65,14 +63,11 @@ module.exports = {
     },
     updateMoneyValues: async (req, res) => {
         const {_id, income, expenses, balance, secret} = req.body
-        console.log(_id, income, expenses, balance)
-
         const moneyValues = await MoneyValueSchema.findOneAndUpdate(
             {secret: secret},
             {$set: {income: income, expenses:expenses, balance:balance}},
             {new : true}
         )
-
         return sendRes(res, false, 'all good', moneyValues)
     },
     latestMoneyValues: async (req, res) => {

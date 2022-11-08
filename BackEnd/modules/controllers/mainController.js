@@ -67,15 +67,13 @@ module.exports = {
         const {_id, income, expenses, balance, secret} = req.body
         console.log(_id, income, expenses, balance)
 
-        const post = await MoneyValueSchema.findOneAndUpdate(
+        const moneyValues = await MoneyValueSchema.findOneAndUpdate(
             {secret: secret},
             {$set: {income: income, expenses:expenses, balance:balance}},
             {new : true}
         )
 
-        console.log(post)
-
-        return sendRes(res, false, 'all good', post)
+        return sendRes(res, false, 'all good', moneyValues)
     },
     latestMoneyValues: async (req, res) => {
         const {secret} = req.params
